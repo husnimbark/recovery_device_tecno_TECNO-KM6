@@ -1,0 +1,50 @@
+# Android fstab file.
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+# mount point		fs		device					device2			flags
+
+# Bootable partitions
+/boot			emmc		/dev/block/by-name/boot						flags=display=boot;slotselect;backup;flashimg
+/vendor_boot		emmc		/dev/block/by-name/vendor_boot					flags=display=vendor_boot;slotselect;backup;flashimg
+/dtbo			emmc		/dev/block/by-name/dtbo						flags=display=dtbo;slotselect;backup;flashimg
+
+# AVB / vbmeta
+/vbmeta			emmc		/dev/block/by-name/vbmeta					flags=display=vbmeta;slotselect;backup;flashimg
+/vbmeta_system		emmc		/dev/block/by-name/vbmeta_system				flags=display=vbmeta_system;slotselect;backup;flashimg
+/vbmeta_vendor		emmc		/dev/block/by-name/vbmeta_vendor				flags=display=vbmeta_vendor;slotselect;backup;flashimg
+
+# Metadata & misc
+/metadata		ext4		/dev/block/by-name/metadata					flags=display=metadata;backup
+/misc			emmc		/dev/block/by-name/misc						flags=display=misc;backup
+
+# Sensitive / persist data
+/nvcfg			ext4		/dev/block/by-name/nvcfg					flags=display=nvcfg;backup
+/nvdata			ext4		/dev/block/by-name/nvdata					flags=display=nvdata;backup
+/persist_image		emmc		/dev/block/by-name/persist					flags=display=persist;backup
+/persistent		emmc		/dev/block/by-name/frp						flags=display=persistent;backup
+/protect_f		ext4		/dev/block/by-name/protect1					flags=display=protect_f;backup
+/protect_s		ext4		/dev/block/by-name/protect2					flags=display=protect_s;backup
+/nvram			emmc		/dev/block/by-name/nvram					flags=display=nvram;backup
+
+# Standard MTK partitions
+/expdb			emmc		/dev/block/by-name/expdb					flags=display=expdb
+/logo			emmc		/dev/block/by-name/logo						flags=display=logo;slotselect;backup
+/otp			emmc		/dev/block/by-name/otp						flags=display=otp
+/seccfg			emmc		/dev/block/by-name/seccfg					flags=display=seccfg
+/spmfw			emmc		/dev/block/by-name/spmfw					flags=display=spmfw;slotselect
+/tee1			emmc		/dev/block/by-name/tee1						flags=display=tee1
+/tee2			emmc		/dev/block/by-name/tee2						flags=display=tee2
+
+# Removable storage
+/usb_otg		auto		/dev/block/sdd1			/dev/block/sdd		flags=display="USB-OTG";storage;wipeingui;removable;backup=0
+
+# Flashable logical partition images
+/system_image		emmc		/dev/block/bootdevice/by-name/system				flags=display="System Image";backup;flashimg
+/vendor_image		emmc		/dev/block/bootdevice/by-name/vendor				flags=display="Vendor Image";backup;flashimg
+/system_ext_image	emmc		/dev/block/bootdevice/by-name/system_ext			flags=display="System_EXT Image";backup;flashimg
+/product_image		emmc		/dev/block/bootdevice/by-name/product				flags=display="Product Image";backup;flashimg
+/vendor_dlkm_image	emmc		/dev/block/bootdevice/by-name/vendor_dlkm			flags=display="VendorDLKM Image";backup;flashimg
+
+# Cache (tranfs)
+/cache			ext4		/dev/block/by-name/tranfs					flags=display=cache;backup;wipeingui

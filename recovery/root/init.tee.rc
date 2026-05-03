@@ -1,0 +1,46 @@
+# Start Daemon (Registry directories should already be present)
+# Only .drbin files present in vendor/app/mcRegistry are listed here
+service mobicore /vendor/bin/mcDriverDaemon --sfs-reformat --P1 /mnt/vendor/persist/mcRegistry \
+	-r /vendor/app/mcRegistry/06090000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/020f0000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/05120000000000000000000000000001.drbin \
+	-r /vendor/app/mcRegistry/033c0000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/07150000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/07170000000000000000000000000000.drbin \
+	-r /vendor/app/mcRegistry/08050000000000000000000000003419.drbin \
+	-r /vendor/app/mcRegistry/40188311faf343488db888ad39496f9a.drbin \
+	-r /vendor/app/mcRegistry/5020170115e016302017012521300000.drbin
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+on init
+    mkdir /mnt/vendor/persist 0771 system system
+
+on post-fs
+    chown system system /mnt/vendor/persist
+    chmod 0771 /mnt/vendor/persist
+    restorecon /mnt/vendor/persist
+    mkdir /mnt/vendor/persist/mcRegistry 0771 system system
+    mkdir /mnt/vendor/persist/paytrigger
+    chown system system /mnt/vendor/persist/paytrigger
+    chmod 0777 /mnt/vendor/persist/paytrigger
+    mkdir /mnt/vendor/persist/startPara
+    chown system system /mnt/vendor/persist/startPara
+    chmod 0777 /mnt/vendor/persist/startPara
+    mkdir /tranfs/startPara
+    chown system system /tranfs/startPara
+    chmod 0777 /tranfs/startPara
+
+on post-fs-data
+    mkdir /data/vendor/key_provisioning 0771 system system
+
+on property:ro.crypto.state=unencrypted
+    mkdir /data/vendor/mcRegistry 0775 system system
+
+on property:ro.crypto.type=file && property:ro.crypto.state=encrypted
+    mkdir /data/vendor/mcRegistry 0775 system system
+
+on property:vold.decrypt=trigger_restart_framework
+    mkdir /data/vendor/mcRegistry 0775 system system
