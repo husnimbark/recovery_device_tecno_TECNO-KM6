@@ -26,7 +26,16 @@ product /product erofs ro wait,slotselect,avb,logical,first_stage_mount
 vendor_dlkm /vendor_dlkm erofs ro wait,slotselect,avb,logical,first_stage_mount
 
 
+odm_dlkm /odm_dlkm erofs ro wait,slotselect,avb,logical,first_stage_mount
+
+
 odm_dlkm /odm_dlkm ext4 ro wait,slotselect,avb,logical,first_stage_mount
+
+odm /odm erofs ro wait,slotselect,logical,first_stage_mount,nofail
+odm /odm ext4  ro wait,slotselect,logical,first_stage_mount,nofail
+
+system_dlkm /system_dlkm erofs ro wait,slotselect,logical,first_stage_mount,nofail
+system_dlkm /system_dlkm ext4  ro wait,slotselect,logical,first_stage_mount,nofail
 
 
 /dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,discard wait,check,formattable,first_stage_mount
@@ -170,3 +179,6 @@ tr_preload /tr_preload ext4 ro wait,slotselect,logical,first_stage_mount,avb_key
 tr_preload /tr_preload erofs ro wait,slotselect,logical,first_stage_mount,avb_keys=/vendor/etc/tran_avb.pubkey,nofail
 tr_overlayfs /tr_overlayfs ext4 ro wait,slotselect,logical,first_stage_mount,avb_keys=/vendor/etc/tran_avb.pubkey,nofail
 tr_overlayfs /tr_overlayfs erofs ro wait,slotselect,logical,first_stage_mount,avb_keys=/vendor/etc/tran_avb.pubkey,nofail
+
+mi_ext /mi_ext erofs ro wait,slotselect,logical,first_stage_mount,nofail
+mi_ext /mi_ext ext4  ro wait,slotselect,logical,first_stage_mount,nofail
