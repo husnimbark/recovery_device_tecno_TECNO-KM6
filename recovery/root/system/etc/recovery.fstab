@@ -43,3 +43,6 @@ tr_theme			/tr_theme	auto		ro											wait,slotselect,logical,nofail
 # External SD Card
 /devices/platform/soc/11240000.mmc*		/sdcard		auto		defaults							recoveryonly,voldmanaged=sdcard1:auto
 /devices/platform/soc/soc:odm/11230000.msdc*	/sdcard		auto		defaults							recoveryonly,voldmanaged=sdcard1:auto
+
+# USB OTG
+/devices/platform/soc/mt_usb*			/usb_otg	auto		defaults							recoveryonly,voldmanaged=usbotg:auto
