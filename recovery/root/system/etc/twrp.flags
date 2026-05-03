@@ -38,6 +38,7 @@
 
 # Removable storage
 /usb_otg		auto		/dev/block/sdd1			/dev/block/sdd		flags=display="USB-OTG";storage;wipeingui;removable;backup=0
+/sdcard		auto		/dev/block/mmcblk1p1		/dev/block/mmcblk1		flags=display="MicroSD";storage;wipeingui;removable;backup=0
 
 # Flashable logical partition images
 /system_image		emmc		/dev/block/bootdevice/by-name/system				flags=display="System Image";backup;flashimg
