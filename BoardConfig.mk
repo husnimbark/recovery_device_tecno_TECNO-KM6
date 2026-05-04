@@ -14,7 +14,10 @@ TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
 
 # The path to a temperature sensor
-TW_CUSTOM_CPU_TEMP_PATH := "/sys/devices/virtual/thermal/thermal_zone19/temp"
+TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone1/temp
+
+# The path to a brightness
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 
 # Power
 ENABLE_CPUSETS := true
@@ -148,7 +151,6 @@ TW_EXTRA_LANGUAGES := true
 TW_FRAMERATE := 120
 TW_THEME := portrait_hdpi
 TARGET_USES_MKE2FS := true
-TW_MAX_BRIGHTNESS := 255
 TW_LOAD_VENDOR_BOOT_MODULES := true
 
 # StatusBar
@@ -157,6 +159,13 @@ TW_CUSTOM_CPU_POS := 300
 TW_CUSTOM_CLOCK_POS := 70
 TW_CUSTOM_BATTERY_POS := 790
 
+# USB Configuration
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+
+# USB OTG
+TW_HAS_USB_OTG := true
+TW_USB_STORAGE := true
+
 # Hack depends
 ALLOW_MISSING_DEPENDENCIES := true
 
@@ -164,8 +173,10 @@ ALLOW_MISSING_DEPENDENCIES := true
 TARGET_OTA_ASSERT_DEVICE := TECNO-KM6
 
 # Brightness
-#override TW_DEFAULT_BRIGHTNESS := 2047
-#override TW_MAX_BRIGHTNESS := 4095
+TW_DEFAULT_BRIGHTNESS := 80
+TW_MAX_BRIGHTNESS := 255
+override TW_DEFAULT_BRIGHTNESS := 1200
+override TW_MAX_BRIGHTNESS := 5119
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_TECNO-KM6
