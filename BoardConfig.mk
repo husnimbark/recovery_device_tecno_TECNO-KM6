@@ -13,8 +13,7 @@ TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
 
-# The path to a temperature sensor
-TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone1/temp
+# The temp show unit
 TW_TEMP_IN_MILLICELSIUS := true
 
 # The path to a brightness
@@ -148,7 +147,7 @@ TW_INCLUDE_FASTBOOTD := true
 TW_EXCLUDE_APEX := true
 TW_EXCLUDE_LPDUMP := true
 TW_EXTRA_LANGUAGES := true
-TW_FRAMERATE := 120
+TW_FRAMERATE := 60
 TW_THEME := portrait_hdpi
 TARGET_USES_MKE2FS := true
 TW_LOAD_VENDOR_BOOT_MODULES := true
@@ -163,7 +162,6 @@ TW_CUSTOM_BATTERY_POS := 790
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # USB OTG
-TW_HAS_USB_OTG := true
 TW_USB_STORAGE := true
 
 # Hack depends
