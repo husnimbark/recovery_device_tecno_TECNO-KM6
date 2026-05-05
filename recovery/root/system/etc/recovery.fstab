@@ -35,6 +35,6 @@ tr_theme			/tr_theme	auto		ro											wait,slotselect,logical,nofail
 /dev/block/by-name/persist	/persist	ext4	noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc			wait,check,formattable
 
 # USB OTG
-/dev/block/sdd     /usb_otg    auto    defaults    flags=display="OTG";storage;wipeingui;removable
-/dev/block/sdd1    /usb_otg    auto    defaults    flags=display="OTG";storage;wipeingui;removable
-/dev/block/sdd2    /usb_otg    auto    defaults    flags=display="OTG";storage;wipeingui;removable
+/dev/block/sdd     /usb_otg    auto    defaults    defaults
+/dev/block/sdd1    /usb_otg    auto    defaults    defaults
+/dev/block/sdd2    /usb_otg    auto    defaults    defaults
