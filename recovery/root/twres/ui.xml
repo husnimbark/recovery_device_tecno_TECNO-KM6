@@ -438,7 +438,7 @@
 		<variable name="fileselector_repack_height" value="1280"/>
 		<variable name="fileselector_filemanager_height" value="1376"/>
 		<variable name="partitionlist_spacing" value="0"/>
-		<variable name="partitionlist_storage_height" value="800"/>
+		<variable name="partitionlist_storage_height" value="544"/>
 		<variable name="partitionlist_flashimage_height" value="544"/>
 		<variable name="partitionlist_wipe_height" value="1088"/>
 		<variable name="partitionlist_mount_height" value="800"/>
