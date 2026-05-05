@@ -323,7 +323,7 @@
 
 		<style name="storage_list">
 			<highlight color="%fileselector_highlight_color%"/>
-	        <placement x="%s_list_x%" y="%row13_y%" w="%content_overlay_width%" h="%partitionlist_storage_height%"/>
+	        <placement x="%s_list_x%" y="%row13_y%" w="844" h="%partitionlist_storage_height%"/>
 			<fastscroll linecolor="%fileselector_linecolor2%" rectcolor="%accent_color2%" w="%fastscroll_w%" linew="%fastscroll_linew%" rectw="fastscroll_rectw" recth="%fastscroll_recth%"/>
 			<dimensions lineh="%slidervalue_lineh%" linepadding="%slidervalue_padding%" sliderw="%slidervalue_sliderw%" sliderh="%slidervalue_sliderh%"/>
 			<icon selected="radio_true" unselected="radio_false"/>
