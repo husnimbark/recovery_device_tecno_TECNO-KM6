@@ -4,9 +4,6 @@ on early-init
     # write /sys/class/udc/musb-hdrc/device/cmode 3
     setprop sys.usb.configfs 0
 
-on init
-    write /sys/module/block/parameters/events_dfl_poll_msecs 1000
-
 on post-fs
     # Use Google Vendor ID for ADB, Sideload, and fastboot (stock recovery-like)
     setprop sys.usb.vid "0x18D1"
@@ -57,6 +54,8 @@ on boot
     chmod a+x config/usb_gadget/g1/strings/0x409
     chmod 0666 /config/usb_gadget/g1/strings/0x409/product
     #SDD: add multi device name by lijia.chen 2020.08.10 end
+
+    write /sys/module/block/parameters/events_dfl_poll_msecs 1000
 
 on property:init.svc.adbd=stopped
     setprop sys.usb.ffs.ready 0
