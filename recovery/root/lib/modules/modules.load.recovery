@@ -179,6 +179,10 @@ gpueb.ko
 mtk_gpu_hal.ko
 mtk_gpufreq_wrapper.ko
 reset-ti-syscon.ko
+soc_temp_lvts.ko
+pmic_temp.ko
+thermal-generic-adc.ko
+board_temp.ko
 thermal_interface.ko
 mt6358-accdet.ko
 meta.ko
