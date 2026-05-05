@@ -8,6 +8,8 @@ on init
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     setprop crypto.ready 1
     start boot-hal-1-2
+    write /sys/class/thermal/thermal_zone0/mode enabled
+    restorecon /sys/class/thermal/thermal_zone0/temp
 
 on fs
     wait /dev/block/platform/soc/11270000.ufshci
