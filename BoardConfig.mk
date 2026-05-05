@@ -15,6 +15,7 @@ TARGET_CPU_VARIANT := generic
 
 # The path to a temperature sensor
 TW_CUSTOM_CPU_TEMP_PATH := /sys/class/thermal/thermal_zone1/temp
+TW_TEMP_IN_MILLICELSIUS := true
 
 # The path to a brightness
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
