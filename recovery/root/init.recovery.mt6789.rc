@@ -7,9 +7,7 @@ on init
     setprop sys.usb.ffs.aio_compat 0
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     setprop crypto.ready 1
-    write /sys/class/thermal/thermal_zone0/mode enabled
-    restorecon /sys/class/thermal/thermal_zone0/temp
-
+  
 # Start vold early for metadata encryption support
 on early-fs
     start vold
@@ -49,6 +47,9 @@ on boot
     chown root root /sys/class/leds/vibrator/brightness
     chmod 0666 /sys/class/leds/vibrator/brightness
     symlink /sys/class/leds/vibrator/brightness /sys/class/timed_output/vibrator/enable
+    # Fix CPU temp path
+    chown root root /sys/devices/virtual/thermal/thermal_zone19/temp
+    chmod 0644 /sys/devices/virtual/thermal/thermal_zone19/temp
 
 on post-fs-data
     # Create directories for Trustonic TEE crypto engine
