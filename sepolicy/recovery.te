@@ -1,16 +1,13 @@
 # Recovery SELinux policy for TECNO KM6
-# Fixes AVC denied warnings seen in logcat during PBRP boot
+# Only contains rules that do not conflict with AOSP public neverallow policies.
+# Rules for service_manager add/find and hwservice_manager add have been removed
+# as they violate neverallow in system/sepolicy/public/
 
-# Allow recovery to add to service_manager
-allow recovery service_manager_service:service_manager add;
-allow recovery service_manager_vndservice:service_manager add;
+# Allow recovery to read thermal sysfs nodes
+allow recovery sysfs_thermal:file r_file_perms;
 
-# Allow recovery to add to hwservice_manager
-allow recovery hidl_base_hwservice:hwservice_manager add;
-allow recovery hidl_manager_hwservice:hwservice_manager add;
-allow recovery hidl_token_hwservice:hwservice_manager add;
-allow recovery hal_bootctl_hwservice:hwservice_manager add;
+# Allow recovery to access vibrator LED sysfs
+allow recovery sysfs_leds:file rw_file_perms;
 
-# Allow recovery to find keymint and sharedsecret services
-allow recovery hal_keymint_service:service_manager find;
-allow recovery hal_sharedsecret_service:service_manager find;
+# Allow recovery to access flashlight sysfs
+allow recovery sysfs:file rw_file_perms;
