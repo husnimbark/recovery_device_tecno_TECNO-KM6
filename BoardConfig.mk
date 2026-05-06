@@ -13,9 +13,10 @@ TARGET_CPU_ABI := arm64-v8a
 TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
 
-# The temp show unit
+# CPU Temp - use zone0 which is available from kernel early boot
+# zone19 requires MTK thermal modules which load late
 TW_TEMP_IN_MILLICELSIUS := true
-TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone19/temp
+TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone0/temp
 
 # The path to a brightness
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
@@ -154,11 +155,11 @@ TW_THEME := portrait_hdpi
 TARGET_USES_MKE2FS := true
 TW_LOAD_VENDOR_BOOT_MODULES := true
 
-# Vibrator - KM6 uses LED class driver
+# Vibrator - KM6 uses regulator-vibrator via LED class driver
 # Path: /sys/class/leds/vibrator/brightness (1=on, 0=off)
 TW_NO_HAPTICS := false
 TW_HAPTICS_TSPDRV := false
-TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_VIBRATOR_SYSFS_NODE := /sys/class/leds/vibrator/brightness
 
 # Flashlight - MTK CW8722 via flashlight_core
 TW_TORCH_PATH := /sys/class/torch/torch/torch_level
