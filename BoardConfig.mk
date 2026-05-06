@@ -15,6 +15,7 @@ TARGET_CPU_VARIANT := generic
 
 # The temp show unit
 TW_TEMP_IN_MILLICELSIUS := true
+TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone19/temp
 
 # The path to a brightness
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
