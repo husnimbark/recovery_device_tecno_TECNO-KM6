@@ -153,6 +153,12 @@ TW_THEME := portrait_hdpi
 TARGET_USES_MKE2FS := true
 TW_LOAD_VENDOR_BOOT_MODULES := true
 
+# Vibrator - KM6 uses LED class driver
+# Path: /sys/class/leds/vibrator/brightness (1=on, 0=off)
+TW_NO_HAPTICS := false
+TW_HAPTICS_TSPDRV := false
+TW_INPUT_BLACKLIST := "hbtp_vm"
+
 # StatusBar
 TW_STATUS_ICONS_ALIGN := center
 TW_CUSTOM_CPU_POS := 300
@@ -164,6 +170,9 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # USB OTG
 TW_USB_STORAGE := true
+
+# SELinux
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
 
 # Hack depends
 ALLOW_MISSING_DEPENDENCIES := true
