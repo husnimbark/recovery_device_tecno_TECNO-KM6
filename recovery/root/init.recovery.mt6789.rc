@@ -7,23 +7,52 @@ on init
     setprop sys.usb.ffs.aio_compat 0
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     setprop crypto.ready 1
-    start boot-hal-1-2
     write /sys/class/thermal/thermal_zone0/mode enabled
     restorecon /sys/class/thermal/thermal_zone0/temp
+
+# Start vold early for metadata encryption support
+on early-fs
+    start vold
 
 on fs
     wait /dev/block/platform/soc/11270000.ufshci
     symlink /dev/block/platform/soc/11270000.ufshci /dev/block/bootdevice
     install_keyring
 
+# Mount late-mount partitions explicitly (needed for /data FBE decrypt)
+on late-fs
+    mount_all /first_stage_ramdisk/fstab.mt6789 --late
+
+on post-fs
+    start boot-hal-1-2
+
+    # Support A/B feature for UFS boot region
+    wait /dev/block/mmcblk0boot0 2
+    symlink /dev/block/sda /dev/block/mmcblk0boot0
+    symlink /dev/block/sdb /dev/block/mmcblk0boot1
+    symlink /dev/block/mmcblk0boot0 /dev/block/by-name/preloader_a
+    symlink /dev/block/mmcblk0boot1 /dev/block/by-name/preloader_b
+
+    # Support A/B feature for combo emmc and ufs OTA update
+    symlink /dev/block/by-name/preloader_a /dev/block/by-name/preloader_emmc_a
+    symlink /dev/block/by-name/preloader_b /dev/block/by-name/preloader_emmc_b
+    symlink /dev/block/by-name/preloader_a /dev/block/by-name/preloader_ufs_a
+    symlink /dev/block/by-name/preloader_b /dev/block/by-name/preloader_ufs_b
+
+    symlink /dev/block/mapper/pl_a /dev/block/by-name/preloader_raw_a
+    symlink /dev/block/mapper/pl_b /dev/block/by-name/preloader_raw_b
+
 on boot
     setprop sys.usb.config adb
+    start mtk.plpath.utils.link
 
 on post-fs-data
-    start health-hal-2-1
+    # Create directories for Trustonic TEE crypto engine
+    mkdir /data/vendor_de 0770 system system
+    mkdir /data/vendor_de/0 0770 system system
+    mkdir /data/vendor_de/0/cryptoeng 0770 system system
 
-on boot
-    start mtk.plpath.utils.link
+    start health-hal-2-1
 
 on property:persist.vendor.mtk.pl_lnk=1
     symlink /dev/block/mapper/pl_a /dev/block/by-name/preloader_raw_a
@@ -78,6 +107,27 @@ on property:ro.crypto.state=encrypted && property:ro.boot.dynamic_partitions=tru
     start mobicore
     start vendor.gatekeeper-1-0
     start vendor.keymint-trustonic
+
+# Stop crypto services after decrypt is done to free resources
+on property:ro.crypto.state=unsupported
+    stop mobicore
+    stop vendor.gatekeeper-1-0
+    stop vendor.keymint-trustonic
+
+on property:ro.crypto.state=unencrypted
+    stop mobicore
+    stop vendor.gatekeeper-1-0
+    stop vendor.keymint-trustonic
+
+on property:twrp.decrypt.done=true
+    stop mobicore
+    stop vendor.gatekeeper-1-0
+    stop vendor.keymint-trustonic
+
+on property:crypto.ready=0
+    stop mobicore
+    stop vendor.gatekeeper-1-0
+    stop vendor.keymint-trustonic
 
 on property:servicemanager.ready=true
     setprop sys.boot_completed 1
