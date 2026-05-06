@@ -176,9 +176,6 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 # USB OTG
 TW_USB_STORAGE := true
 
-# SELinux
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
-
 # Hack depends
 ALLOW_MISSING_DEPENDENCIES := true
 
