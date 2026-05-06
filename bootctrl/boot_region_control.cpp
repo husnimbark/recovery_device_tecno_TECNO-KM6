@@ -81,12 +81,11 @@ static bool ufs_set_active_boot_part(int boot)
 bool BootControlExt::SetBootRegionSlot(unsigned int slot) {
   int boot_part = 0;
 
-
   LOG(ERROR) << "setActiveBootSlot SetBootRegionSlot " << slot;
   /* slot 0 is A , slot 1 is B */
   if (slot >= 2) {
     LOG(ERROR) << "Wrong Slot value " << slot;
-    return 0;
+    return false;
   }
 
   if(slot)
@@ -94,8 +93,11 @@ bool BootControlExt::SetBootRegionSlot(unsigned int slot) {
   else
     boot_part = 1;
 
-  if (!ufs_set_active_boot_part(boot_part))
-      return false;
+  if (!ufs_set_active_boot_part(boot_part)) {
+      LOG(WARNING) << "UFS boot region IOCTL failed, ignoring (misc partition already updated)";
+      // Non-fatal: misc partition is the authoritative slot record for Android.
+      // UFS Boot LUN switching may not be supported on all MTK devices.
+  }
 
   return true;
 }

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 #include <cstdint>
+#include <string>
 #define LOG_TAG "android.hardware.boot@1.2-mtkimpl"
 
 #include <memory>
@@ -87,12 +88,26 @@ Return<void> BootControl::markBootSuccessful(markBootSuccessful_cb _hidl_cb) {
 
 Return<void> BootControl::setActiveBootSlot(uint32_t slot, setActiveBootSlot_cb _hidl_cb) {
     struct CommandResult cr;
-    if (impl_.SetActiveBootSlot(slot) && implext_.SetBootRegionSlot(slot)) {
+    const char* slot_name = (slot == 0) ? "A" : "B";
+    const char* slot_suffix = (slot == 0) ? "_a" : "_b";
+
+    LOG(INFO) << "setActiveBootSlot: switching to slot " << slot_name << " (suffix: " << slot_suffix << ")";
+
+    bool misc_ok = impl_.SetActiveBootSlot(slot);
+    bool ufs_ok = implext_.SetBootRegionSlot(slot);
+
+    if (!ufs_ok) {
+        LOG(WARNING) << "UFS boot region set failed (non-fatal), misc partition still updated";
+    }
+
+    if (misc_ok) {
         cr.success = true;
-        cr.errMsg = "Success";
+        cr.errMsg = std::string("Active boot slot set to ") + slot_name + " (suffix: " + slot_suffix + ")";
+        LOG(INFO) << "setActiveBootSlot: success - " << cr.errMsg;
     } else {
         cr.success = false;
-        cr.errMsg = "Operation failed";
+        cr.errMsg = std::string("Failed to set active boot slot to ") + slot_name;
+        LOG(ERROR) << "setActiveBootSlot: " << cr.errMsg;
     }
     _hidl_cb(cr);
     return Void();
