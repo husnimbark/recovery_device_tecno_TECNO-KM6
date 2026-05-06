@@ -160,6 +160,10 @@ TW_NO_HAPTICS := false
 TW_HAPTICS_TSPDRV := false
 TW_INPUT_BLACKLIST := "hbtp_vm"
 
+# Flashlight - MTK CW8722 via flashlight_core
+TW_TORCH_PATH := /sys/class/torch/torch/torch_level
+TW_BRIGHTNESS_PATH_TORCH_MAX_BRIGHTNESS := 1
+
 # StatusBar
 TW_STATUS_ICONS_ALIGN := center
 TW_CUSTOM_CPU_POS := 300
