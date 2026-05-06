@@ -45,6 +45,10 @@ on post-fs
 on boot
     setprop sys.usb.config adb
     start mtk.plpath.utils.link
+    # Fix vibrator path for PBRP (LED class driver)
+    chown root root /sys/class/leds/vibrator/brightness
+    chmod 0666 /sys/class/leds/vibrator/brightness
+    symlink /sys/class/leds/vibrator/brightness /sys/class/timed_output/vibrator/enable
 
 on post-fs-data
     # Create directories for Trustonic TEE crypto engine
