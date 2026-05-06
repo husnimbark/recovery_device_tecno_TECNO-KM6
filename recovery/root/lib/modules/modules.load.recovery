@@ -159,6 +159,8 @@ tran_usb_ctrl.ko
 usb_switch_evo.ko
 pwm-mtk-disp.ko
 leds-mtk.ko
+cw8722.ko
+flashlight.ko
 leds-mtk-disp.ko
 leds-mtk-pwm.ko
 rt4831a_drv.ko
