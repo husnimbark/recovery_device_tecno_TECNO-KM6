@@ -30,6 +30,7 @@ AB_OTA_PARTITIONS += \
     product \
     system \
     system_ext \
+    vbmeta \
     vbmeta_system \
     vbmeta_vendor \
     vendor \
@@ -57,9 +58,9 @@ PRODUCT_PROPERTY_OVERRIDES += ro.twrp.vendor_boot=true
 # Dynamic Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-# API
-PRODUCT_SHIPPING_API_LEVEL := 31
-PRODUCT_TARGET_VNDK_VERSION := 31
+# API - KM6 ships with Android 15
+PRODUCT_SHIPPING_API_LEVEL := 35
+PRODUCT_TARGET_VNDK_VERSION := 35
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
