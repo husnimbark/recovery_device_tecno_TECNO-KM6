@@ -118,6 +118,7 @@ TW_INCLUDE_CRYPTO_FBE := true
 TW_USE_FSCRYPT_POLICY := 2
 TW_FORCE_KEYMASTER_VER := true
 TW_INCLUDE_ADDITIONAL_FSTAB := true
+TW_PREPARE_DATA_MEDIA_EARLY := true
 
 # Hack
 PLATFORM_SECURITY_PATCH := 2099-12-31
@@ -148,18 +149,21 @@ TW_INCLUDE_FASTBOOTD := true
 
 # TWRP Configs
 TW_EXCLUDE_APEX := true
-TW_EXCLUDE_LPDUMP := true
 TW_EXTRA_LANGUAGES := true
 TW_FRAMERATE := 60
 TW_THEME := portrait_hdpi
 TARGET_USES_MKE2FS := true
 TW_LOAD_VENDOR_BOOT_MODULES := true
 
-# Vibrator - KM6 uses regulator-vibrator via LED class driver
-# Path: /sys/class/leds/vibrator/brightness (1=on, 0=off)
-TW_NO_HAPTICS := false
-TW_HAPTICS_TSPDRV := false
-TW_VIBRATOR_SYSFS_NODE := /sys/class/leds/vibrator/brightness
+# Virtual A/B - needed for super.img flashing support
+BOARD_USES_RECOVERY_AS_BOOT := false
+AB_OTA_UPDATER := true
+TW_INCLUDE_LIBRESETPROP := true
+
+# Vibrator - regulator-vibrator via LED class driver
+# TW_VIBRATOR_SYSFS_NODE not supported in PBRP 12.1
+# timed_output path does not exist on KM6, disable haptics
+TW_NO_HAPTICS := true
 
 # Flashlight - MTK CW8722 via flashlight_core
 TW_TORCH_PATH := /sys/class/torch/torch/torch_level
