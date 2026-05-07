@@ -4,6 +4,9 @@
 
 # mount point		fs		device					device2			flags
 
+# Super partition (dynamic partitions)
+/super			emmc		/dev/block/by-name/super					flags=display=super;backup;flashimg
+
 # Bootable partitions
 /boot			emmc		/dev/block/by-name/boot						flags=display=boot;slotselect;backup;flashimg
 /vendor_boot		emmc		/dev/block/by-name/vendor_boot					flags=display=vendor_boot;slotselect;backup;flashimg
@@ -38,7 +41,7 @@
 
 # Removable storage
 /external_sd		auto		/dev/block/mmcblk1p1				/dev/block/mmcblk0p1					flags=display="Micro SD Card";storage;wipeingui;removable;backup=0
-/usb_otg			auto		/dev/block/sdd1				/dev/block/sdd						flags=display="USB-OTG";storage;wipeingui;removable;backup=0
+/usb_otg		auto		/dev/block/sda1					/dev/block/sda		/dev/block/sdd1			flags=display="USB-OTG";storage;wipeingui;removable;backup=0
 
 # Flashable logical partition images
 /system_image		emmc		/dev/block/bootdevice/by-name/system				flags=display="System Image";backup;flashimg
