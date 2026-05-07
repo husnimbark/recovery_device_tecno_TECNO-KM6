@@ -23,7 +23,7 @@ tr_theme			/tr_theme	auto		ro											wait,slotselect,logical,nofail
 
 # Userdata & metadata
 /dev/block/by-name/metadata	/metadata	ext4		noatime,nosuid,nodev,discard							wait,check,formattable,first_stage_mount
-/dev/block/by-name/userdata	/data		f2fs		noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt	wait,check,formattable,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,quota,reservedsize=128m
+/dev/block/by-name/userdata	/data		f2fs		noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt	wait,check,formattable,latemount,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,quota,reservedsize=128m,length=-16384
 
 # misc - required by update_engine to determine boot device address
 /dev/block/by-name/misc		/misc		emmc		defaults								defaults
