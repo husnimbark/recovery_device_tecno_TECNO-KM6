@@ -14,4 +14,12 @@ ro.hardware.gatekeeper=trustonic
 ro.vendor.mtk_tee_gp_support=1
 ro.vendor.mtk_trustonic_tee_support=1
 
+# Keymaster
 keymaster_ver=4.1
+
+# Virtual A/B
+ro.virtual_ab.enabled=true
+ro.virtual_ab.compression.enabled=true
+
+# Dynamic partitions
+ro.boot.dynamic_partitions=true
