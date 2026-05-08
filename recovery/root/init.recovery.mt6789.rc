@@ -8,6 +8,9 @@ on init
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     setprop crypto.ready 1
 
+    # FIX: Create /tmp/prop.info to suppress mv warning from PBRP scripts
+    write /tmp/prop.info ""
+
 # Start vold early for metadata encryption support
 on early-fs
     start vold
@@ -44,17 +47,29 @@ on post-fs
 
 on boot
     setprop sys.usb.config adb
+
+    # FIX: Setup USB idVendor/idProduct via ConfigFS
+    # KM6 kernel does not have /sys/class/android_usb — uses ConfigFS gadget
+    write /config/usb_gadget/g1/idVendor 0x0E8D
+    write /config/usb_gadget/g1/idProduct 0xD001
+
     start mtk.plpath.utils.link
+
     # Fix vibrator - regulator-vibrator via LED class driver
     chown root root /sys/class/leds/vibrator/brightness
     chmod 0666 /sys/class/leds/vibrator/brightness
+
     # Fix flashlight path - MTK CW8722
     chown root root /sys/class/torch/torch/torch_level
     chmod 0666 /sys/class/torch/torch/torch_level
+
     # Fix CPU temp - relabel thermal_zone0 for recovery access
     chown root root /sys/devices/virtual/thermal/thermal_zone0/temp
     chmod 0644 /sys/devices/virtual/thermal/thermal_zone0/temp
     restorecon /sys/devices/virtual/thermal/thermal_zone0/temp
+
+    # FIX: Relabel /data/media paths for SELinux storage context
+    restorecon_recursive /data/media
 
 on post-fs-data
     # Create directories for Trustonic TEE crypto engine
