@@ -40,13 +40,13 @@ AB_OTA_PARTITIONS += \
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/mtk_plpath_utils \
-    FILESYSTEM_TYPE_system=ext4 \
+    FILESYSTEM_TYPE_system=erofs \
     POSTINSTALL_OPTIONAL_system=true
 
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_vendor=true \
     POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-    FILESYSTEM_TYPE_vendor=ext4 \
+    FILESYSTEM_TYPE_vendor=erofs \
     POSTINSTALL_OPTIONAL_vendor=true
 
 PRODUCT_PACKAGES += \
@@ -58,7 +58,7 @@ PRODUCT_PROPERTY_OVERRIDES += ro.twrp.vendor_boot=true
 # Dynamic Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
-# API - KM6 ships with Android 15
+# API - KM6 ships with Android 15 (first_api_level=31)
 PRODUCT_SHIPPING_API_LEVEL := 31
 PRODUCT_TARGET_VNDK_VERSION := 31
 

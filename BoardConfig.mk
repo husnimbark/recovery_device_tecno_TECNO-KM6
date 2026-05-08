@@ -17,6 +17,8 @@ TARGET_CPU_VARIANT := generic
 # zone19 requires MTK thermal modules which load late
 TW_TEMP_IN_MILLICELSIUS := true
 TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone0/temp
+# Disable CPU Temperature
+TW_NO_CPU_TEMP := true
 
 # The path to a brightness
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
@@ -67,7 +69,7 @@ BOARD_AVB_ENABLE := true
 
 # Partitions configs
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
-BOARD_SUPER_PARTITION_SIZE := 12884901888 # 12 GiB - must be >= BOARD_MAIN_SIZE
+BOARD_SUPER_PARTITION_SIZE := 12884901888 # 12 GiB
 BOARD_MAIN_SIZE := $(shell echo $$(($(BOARD_SUPER_PARTITION_SIZE) - 4194304)))
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_USES_METADATA_PARTITION := true
@@ -80,13 +82,16 @@ BOARD_MAIN_PARTITION_LIST += \
     vendor \
     vendor_dlkm
 
+# FIX: Actual filesystem on device is erofs (confirmed from recovery log).
+# Using erofs for system/vendor/product/system_ext/vendor_dlkm.
+# odm_dlkm stays ext4 (confirmed from partition log: ext4).
 BOARD_ODM_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := erofs
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
 
 TARGET_COPY_OUT_ODM_DLKM := odm_dlkm
 TARGET_COPY_OUT_PRODUCT := product
@@ -155,14 +160,12 @@ TW_THEME := portrait_hdpi
 TARGET_USES_MKE2FS := true
 TW_LOAD_VENDOR_BOOT_MODULES := true
 
-# Virtual A/B - needed for super.img flashing support
+# Virtual A/B
 BOARD_USES_RECOVERY_AS_BOOT := false
 AB_OTA_UPDATER := true
 TW_INCLUDE_LIBRESETPROP := true
 
-# Vibrator - regulator-vibrator via LED class driver
-# TW_VIBRATOR_SYSFS_NODE not supported in PBRP 12.1
-# timed_output path does not exist on KM6, disable haptics
+# Vibrator - disabled (no timed_output on KM6, regulator-vibrator via LED unsupported in PBRP 12.1)
 TW_NO_HAPTICS := true
 
 # Flashlight - MTK CW8722 via flashlight_core
@@ -175,7 +178,7 @@ TW_CUSTOM_CPU_POS := 300
 TW_CUSTOM_CLOCK_POS := 70
 TW_CUSTOM_BATTERY_POS := 790
 
-# USB Configuration
+# USB Configuration - use ConfigFS (legacy android_usb not present on KM6 kernel)
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 
 # USB OTG
@@ -197,5 +200,5 @@ override TW_MAX_BRIGHTNESS := 5119
 TARGET_INIT_VENDOR_LIB := libinit_TECNO-KM6
 TARGET_RECOVERY_DEVICE_MODULES += libinit_TECNO-KM6
 
-# TWRP Configs
+# Device version
 TW_DEVICE_VERSION := TECNO-KM6
