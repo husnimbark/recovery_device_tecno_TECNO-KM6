@@ -1,6 +1,8 @@
-# Additional fstab used by PBRP/TWRP specifically for FBE decryption.
-# This is intentionally separate from recovery.fstab.
-# Do not remove — without this file, "E:Unable to decrypt FBE device" will occur.
-# Must be kept in sync with recovery.fstab /data entry.
+# Additional fstab entries for PBRP decryption
+# FIX: Added context= label for /data/media to resolve:
+#   "tw_get_context failed to get selinux context"
+#   "Failed to get default contexts and file mode for storage files"
 
-/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,latemount,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,quota,reservedsize=128m,length=-16384
+/dev/block/by-name/metadata /metadata ext4 noatime,nosuid,nodev,discard wait,check,formattable,first_stage_mount
+
+/dev/block/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt wait,check,formattable,quota,latemount,resize,reservedsize=128m,checkpoint=fs,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,fsverity,sysfs_path=/sys/devices/platform/soc/11270000.ufshci
