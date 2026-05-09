@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://orangefox.tech/icon.png" width="600"/>
+<img src="https://orangefox.tech/icon.png" width="150" height="150"/>
 
 # OrangeFox Recovery — TECNO Spark 40 Pro (KM6)
 
