@@ -141,7 +141,7 @@ BOOT_SECURITY_PATCH          := $(PLATFORM_SECURITY_PATCH)
 # ─────────────────────────────────────────
 TW_THEME    := portrait_hdpi
 TW_FRAMERATE := 120
-TARGET_SCREEN_DENSITY := 440
+# TARGET_SCREEN_DENSITY := 440
 
 # Brightness
 # NOTE: override used due to MTK-specific range (0–5119)
@@ -161,7 +161,7 @@ TW_MAX_BRIGHTNESS     := 5119
 # ─────────────────────────────────────────
 # zone0 is available from early boot; zone19 requires MTK thermal modules (load late)
 TW_CUSTOM_CPU_TEMP_PATH    := /sys/devices/virtual/thermal/thermal_zone0/temp
-TW_NO_CPU_TEMP := false
+TW_NO_CPU_TEMP := true
 
 # ─────────────────────────────────────────
 # Power
@@ -236,8 +236,9 @@ TW_DEVICE_VERSION := TECNO-KM6
 # ─────────────────────────────────────────
 # OFOX UI
 # ─────────────────────────────────────────
-OF_SCREEN_H := 2400
+# OF_SCREEN_H := 2400
 OF_STATUS_H := 138
 OF_STATUS_INDENT_LEFT := 66
-OF_STATUS_INDENT_RIGHT := 66
-OF_FL_PATH1 := /sys/class/torch/torch/torch_level
+OF_STATUS_INDENT_RIGHT := 60
+# OF_FL_PATH1 := /sys/class/torch/torch/torch_level
+TW_NO_FLASHLIGHT := true
