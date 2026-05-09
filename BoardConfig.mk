@@ -141,7 +141,7 @@ BOOT_SECURITY_PATCH          := $(PLATFORM_SECURITY_PATCH)
 # ─────────────────────────────────────────
 TW_THEME    := portrait_hdpi
 TW_FRAMERATE := 60
-TARGET_SCREEN_DENSITY := 380
+TARGET_SCREEN_DENSITY := 420
 
 # Brightness
 # NOTE: override used due to MTK-specific range (0–5119)
@@ -236,7 +236,7 @@ TW_DEVICE_VERSION := TECNO-KM6
 # OFOX UI
 # ─────────────────────────────────────────
 OF_SCREEN_H := 2400
-OF_STATUS_H := 130
+OF_STATUS_H := 134
 OF_STATUS_INDENT_LEFT := 64
-OF_STATUS_INDENT_RIGHT := 56
+OF_STATUS_INDENT_RIGHT := 54
 OF_FL_PATH1 := /sys/class/torch/torch/torch_level
