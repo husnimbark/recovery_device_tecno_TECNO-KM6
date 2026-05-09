@@ -111,7 +111,7 @@ device/tecno/TECNO-KM6/
 | MTP / USB OTG                  | ✅ Working |
 | EROFS partition support        | ✅ Working |
 | Magisk flashing                | ✅ Working |
-| Flashlight                     | ✅ Working |
+| Flashlight                     | ❌ Not Working |
 | Backup & Restore               | ✅ Working |
 | Vibrator/Haptics               | ❌ Not supported (hardware limitation) |
 
