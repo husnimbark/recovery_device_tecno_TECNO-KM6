@@ -141,7 +141,7 @@ BOOT_SECURITY_PATCH          := $(PLATFORM_SECURITY_PATCH)
 # ─────────────────────────────────────────
 TW_THEME    := portrait_hdpi
 TW_FRAMERATE := 120
-# TARGET_SCREEN_DENSITY := 440
+TARGET_SCREEN_DENSITY := 480
 
 # Brightness
 # NOTE: override used due to MTK-specific range (0–5119)
