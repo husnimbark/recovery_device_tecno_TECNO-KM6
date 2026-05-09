@@ -140,7 +140,8 @@ BOOT_SECURITY_PATCH          := $(PLATFORM_SECURITY_PATCH)
 # Display & UI
 # ─────────────────────────────────────────
 TW_THEME    := portrait_hdpi
-TW_FRAMERATE := 60
+TW_FRAMERATE := 120
+TARGET_SCREEN_DENSITY := 440
 
 # Brightness
 # NOTE: override used due to MTK-specific range (0–5119)
@@ -149,18 +150,18 @@ TW_DEFAULT_BRIGHTNESS := 1200
 TW_MAX_BRIGHTNESS     := 5119
 
 # Status bar icon positions
-TW_STATUS_ICONS_ALIGN  := center
-TW_CUSTOM_CPU_POS      := 300
-TW_CUSTOM_CLOCK_POS    := 70
-TW_CUSTOM_BATTERY_POS  := 790
+# TW_STATUS_ICONS_ALIGN  := center
+# TW_CUSTOM_CPU_POS      := 300
+# TW_CUSTOM_CLOCK_POS    := 70
+# TW_CUSTOM_BATTERY_POS  := 790
+
 
 # ─────────────────────────────────────────
 # CPU Temperature
 # ─────────────────────────────────────────
 # zone0 is available from early boot; zone19 requires MTK thermal modules (load late)
-TW_TEMP_IN_MILLICELSIUS    := true
-TW_CUSTOM_CPU_TEMP_PATH    := /sys/devices/virtual/thermal/thermal_zone0/temp
-TW_NO_CPU_TEMP             := true
+TW_CUSTOM_CPU_TEMP_PATH    := "/sys/devices/virtual/thermal/thermal_zone0/temp"
+TW_NO_CPU_TEMP := false
 
 # ─────────────────────────────────────────
 # Power
@@ -172,8 +173,7 @@ ENABLE_SCHEDBOOST := true
 # Flashlight
 # ─────────────────────────────────────────
 # MTK CW8722 via flashlight_core
-TW_TORCH_PATH                    := /sys/class/torch/torch/torch_level
-TW_BRIGHTNESS_PATH_TORCH_MAX_BRIGHTNESS := 1
+TW_TORCH_PATH                    := "/sys/class/torch/torch/torch_level"
 
 # ─────────────────────────────────────────
 # USB
@@ -238,3 +238,12 @@ TARGET_OTA_ASSERT_DEVICE := TECNO-KM6
 # Device Version
 # ─────────────────────────────────────────
 TW_DEVICE_VERSION := TECNO-KM6
+
+# ─────────────────────────────────────────
+# OFOX UI
+# ─────────────────────────────────────────
+OF_SCREEN_H := 2400
+OF_STATUS_H := 138
+OF_STATUS_INDENT_LEFT := 66
+OF_STATUS_INDENT_RIGHT := 66
+OF_FL_PATH1 := "/sys/class/torch/torch/torch_level"
