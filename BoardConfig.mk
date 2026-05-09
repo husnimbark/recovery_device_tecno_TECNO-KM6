@@ -160,7 +160,7 @@ TW_MAX_BRIGHTNESS     := 5119
 # CPU Temperature
 # ─────────────────────────────────────────
 # zone0 is available from early boot; zone19 requires MTK thermal modules (load late)
-TW_CUSTOM_CPU_TEMP_PATH    := "/sys/devices/virtual/thermal/thermal_zone0/temp"
+TW_CUSTOM_CPU_TEMP_PATH    := /sys/devices/virtual/thermal/thermal_zone0/temp
 TW_NO_CPU_TEMP := false
 
 # ─────────────────────────────────────────
@@ -240,4 +240,4 @@ OF_SCREEN_H := 2400
 OF_STATUS_H := 138
 OF_STATUS_INDENT_LEFT := 66
 OF_STATUS_INDENT_RIGHT := 66
-OF_FL_PATH1 := "/sys/class/torch/torch/torch_level"
+OF_FL_PATH1 := /sys/class/torch/torch/torch_level
