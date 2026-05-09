@@ -170,12 +170,6 @@ ENABLE_CPUSETS    := true
 ENABLE_SCHEDBOOST := true
 
 # ─────────────────────────────────────────
-# Flashlight
-# ─────────────────────────────────────────
-# MTK CW8722 via flashlight_core
-TW_TORCH_PATH                    := "/sys/class/torch/torch/torch_level"
-
-# ─────────────────────────────────────────
 # USB
 # ─────────────────────────────────────────
 # KM6 uses ConfigFS; legacy android_usb node not present
