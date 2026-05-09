@@ -8,7 +8,7 @@
 $(call inherit-product, device/tecno/TECNO-KM6/device.mk)
 
 # Inherit common OrangeFox stuff
-$(call inherit-product, vendor/recovery/config/common.mk)
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 # Product Specifics
 PRODUCT_NAME     := ofox_KM6
