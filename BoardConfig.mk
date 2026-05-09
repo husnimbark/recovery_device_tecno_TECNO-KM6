@@ -140,8 +140,8 @@ BOOT_SECURITY_PATCH          := $(PLATFORM_SECURITY_PATCH)
 # Display & UI
 # ─────────────────────────────────────────
 TW_THEME    := portrait_hdpi
-TW_FRAMERATE := 120
-#:TARGET_SCREEN_DENSITY := 480
+TW_FRAMERATE := 60
+TARGET_SCREEN_DENSITY := 380
 
 # Brightness
 # NOTE: override used due to MTK-specific range (0–5119)
@@ -151,17 +151,16 @@ TW_MAX_BRIGHTNESS     := 5119
 
 # Status bar icon positions
 TW_STATUS_ICONS_ALIGN  := center
-# TW_CUSTOM_CPU_POS      := 300
-# TW_CUSTOM_CLOCK_POS    := 70
-# TW_CUSTOM_BATTERY_POS  := 790
+TW_CUSTOM_CPU_POS      := 300
+TW_CUSTOM_CLOCK_POS    := 70
+TW_CUSTOM_BATTERY_POS  := 790
 
 
 # ─────────────────────────────────────────
 # CPU Temperature
 # ─────────────────────────────────────────
 # zone0 is available from early boot; zone19 requires MTK thermal modules (load late)
-TW_CUSTOM_CPU_TEMP_PATH    := /sys/devices/virtual/thermal/thermal_zone0/temp
-TW_NO_CPU_TEMP := true
+TW_CUSTOM_CPU_TEMP_PATH    := /sys/devices/virtual/thermal/thermal_zone1/temp
 
 # ─────────────────────────────────────────
 # Power
@@ -240,5 +239,4 @@ OF_SCREEN_H := 2400
 OF_STATUS_H := 130
 OF_STATUS_INDENT_LEFT := 64
 OF_STATUS_INDENT_RIGHT := 56
-# OF_FL_PATH1 := /sys/class/torch/torch/torch_level
-TW_NO_FLASHLIGHT := true
+OF_FL_PATH1 := /sys/class/torch/torch/torch_level
