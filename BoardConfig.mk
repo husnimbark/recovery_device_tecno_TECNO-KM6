@@ -140,7 +140,7 @@ BOOT_SECURITY_PATCH          := $(PLATFORM_SECURITY_PATCH)
 # Display & UI
 # ─────────────────────────────────────────
 TW_THEME    := portrait_hdpi
-TW_FRAMERATE := 60
+TW_FRAMERATE := 120
 TARGET_SCREEN_DENSITY := 420
 
 # Brightness
@@ -151,9 +151,9 @@ TW_MAX_BRIGHTNESS     := 5119
 
 # Status bar icon positions
 TW_STATUS_ICONS_ALIGN  := center
-TW_CUSTOM_CPU_POS      := 70
-TW_CUSTOM_CLOCK_POS    := 300
-TW_CUSTOM_BATTERY_POS  := 790
+TW_CUSTOM_CPU_POS      := 300
+TW_CUSTOM_CLOCK_POS    := 70
+TW_CUSTOM_BATTERY_POS  := 780
 
 
 # ─────────────────────────────────────────
@@ -236,7 +236,7 @@ TW_DEVICE_VERSION := TECNO-KM6
 # OFOX UI
 # ─────────────────────────────────────────
 OF_SCREEN_H := 2400
-OF_STATUS_H := 134
+OF_STATUS_H := 136
 OF_STATUS_INDENT_LEFT := 64
-OF_STATUS_INDENT_RIGHT := 54
+OF_STATUS_INDENT_RIGHT := 52
 OF_FL_PATH1 := /sys/class/torch/torch/torch_level
