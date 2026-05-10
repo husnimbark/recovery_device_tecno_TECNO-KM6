@@ -149,11 +149,11 @@ TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 TW_DEFAULT_BRIGHTNESS := 1200
 TW_MAX_BRIGHTNESS     := 5119
 
-# Status bar icon positions
-TW_STATUS_ICONS_ALIGN  := center
-TW_CUSTOM_CPU_POS      := 300
-TW_CUSTOM_CLOCK_POS    := 70
-TW_CUSTOM_BATTERY_POS  := 780
+# TWRP Status bar icon positions
+# TW_STATUS_ICONS_ALIGN  := center
+# TW_CUSTOM_CPU_POS      := 300
+# TW_CUSTOM_CLOCK_POS    := 70
+# TW_CUSTOM_BATTERY_POS  := 780
 
 
 # ─────────────────────────────────────────
@@ -236,7 +236,7 @@ TW_DEVICE_VERSION := TECNO-KM6
 # OFOX UI
 # ─────────────────────────────────────────
 OF_SCREEN_H := 2400
-OF_STATUS_H := 136
+OF_STATUS_H := 138
 OF_STATUS_INDENT_LEFT := 64
-OF_STATUS_INDENT_RIGHT := 52
+OF_STATUS_INDENT_RIGHT := 50
 OF_FL_PATH1 := /sys/class/torch/torch/torch_level
