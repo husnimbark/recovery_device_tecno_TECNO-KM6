@@ -140,7 +140,7 @@ BOOT_SECURITY_PATCH          := $(PLATFORM_SECURITY_PATCH)
 # Display & UI
 # ─────────────────────────────────────────
 TW_THEME    := portrait_hdpi
-TW_FRAMERATE := 120
+TW_FRAMERATE := 60
 TARGET_SCREEN_DENSITY := 420
 
 # Brightness
@@ -160,6 +160,7 @@ TW_MAX_BRIGHTNESS     := 5119
 # CPU Temperature
 # ─────────────────────────────────────────
 # zone0 is available from early boot; zone19 requires MTK thermal modules (load late)
+TW_CUSTOM_CPU_TEMP_PATH    := true
 TW_CUSTOM_CPU_TEMP_PATH    := /sys/devices/virtual/thermal/thermal_zone1/temp
 
 # ─────────────────────────────────────────
@@ -239,4 +240,5 @@ OF_SCREEN_H := 2400
 OF_STATUS_H := 138
 OF_STATUS_INDENT_LEFT := 64
 OF_STATUS_INDENT_RIGHT := 50
-OF_FL_PATH1 := /sys/class/torch/torch/torch_level
+# OF_FL_PATH1 := /sys/class/torch/torch/torch_level
+TW_NO_FLASHLIGHT := true
