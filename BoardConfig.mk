@@ -237,8 +237,8 @@ TW_DEVICE_VERSION := TECNO-KM6
 # OFOX UI
 # ─────────────────────────────────────────
 OF_SCREEN_H := 2400
-OF_STATUS_H := 138
+OF_STATUS_H := 140
 OF_STATUS_INDENT_LEFT := 64
-OF_STATUS_INDENT_RIGHT := 50
+OF_STATUS_INDENT_RIGHT := 48
 # OF_FL_PATH1 := /sys/class/torch/torch/torch_level
 TW_NO_FLASHLIGHT := true
