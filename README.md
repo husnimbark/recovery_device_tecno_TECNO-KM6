@@ -8,7 +8,7 @@
 [![Branch](https://img.shields.io/badge/Branch-fox__12.1-blue?style=for-the-badge)](https://gitlab.com/OrangeFox/sync)
 [![Device](https://img.shields.io/badge/Device-TECNO%20KM6-green?style=for-the-badge)](https://github.com)
 [![Chipset](https://img.shields.io/badge/Chipset-Helio%20G100%20(MT6789)-red?style=for-the-badge)](https://github.com)
-[![Release](https://github.com/husnimbark/Action-TWRP-Builder/releases)
+[![Release](https://img.shields.io/badge/Release-white?style=for-the-badge)](https://github.com/husnimbark/Action-TWRP-Builder/releases)
 
 </div>
 
