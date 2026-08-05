@@ -125,6 +125,12 @@ tr_preload /tr_preload ext4 ro wait,slotselect,logical,first_stage_mount,nofail
 tr_preload /tr_preload erofs ro wait,slotselect,logical,first_stage_mount,nofail
 tr_overlayfs /tr_overlayfs ext4 ro wait,slotselect,logical,first_stage_mount,nofail
 tr_overlayfs /tr_overlayfs erofs ro wait,slotselect,logical,first_stage_mount,nofail
+tr_misc /tr_misc erofs ro wait,slotselect,logical,first_stage_mount,nofail
+tr_misc /tr_misc ext4 ro wait,slotselect,logical,first_stage_mount,nofail
+tr_manifest /mnt/vendor/tr_manifest erofs ro wait,slotselect,logical,first_stage_mount,nofail
+tr_manifest /mnt/vendor/tr_manifest ext4 ro wait,slotselect,logical,first_stage_mount,nofail
+
+/mnt/vendor/tr_manifest /tr_manifest none ro,bind wait,nofail
 
 mi_ext /mnt/vendor/mi_ext erofs ro wait,slotselect,logical,first_stage_mount,nofail
 mi_ext /mnt/vendor/mi_ext ext4 ro wait,slotselect,logical,first_stage_mount,nofail
