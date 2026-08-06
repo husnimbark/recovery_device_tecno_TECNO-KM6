@@ -10,9 +10,11 @@ product				/product	auto		ro											wait,slotselect,logical,first_stage_mount
 system_ext			/system_ext	auto		ro											wait,slotselect,logical,first_stage_mount
 vendor_dlkm			/vendor_dlkm	auto		ro											wait,slotselect,logical,first_stage_mount
 odm_dlkm			/odm_dlkm	auto		ro											wait,slotselect,logical,first_stage_mount
+odm				/odm		auto		ro											wait,slotselect,logical,first_stage_mount,nofail,backup=1,flashimg=1
+system_dlkm			/system_dlkm	auto		ro											wait,slotselect,logical,first_stage_mount,nofail,backup=1,flashimg=1
 
 # Userdata & metadata
-/dev/block/by-name/metadata	/metadata	ext4		noatime,nosuid,nodev,discard							wait,check,formattable,first_stage_mount
+/dev/block/by-name/metadata	/metadata	ext4		noatime,nosuid,nodev,discard							wait,check,formattable,first_stage_mount,backup=1,flashimg=1
 /dev/block/by-name/userdata	/data		f2fs		noatime,nosuid,nodev,discard,noflush_merge,fsync_mode=nobarrier,reserve_root=134217,resgid=1065,inlinecrypt	wait,check,formattable,latemount,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption,quota,reservedsize=128m,length=-16384
 
 # misc - required by update_engine to determine boot device address
@@ -21,5 +23,10 @@ odm_dlkm			/odm_dlkm	auto		ro											wait,slotselect,logical,first_stage_moun
 # Cache (tranfs)
 /dev/block/by-name/tranfs	/cache		ext4		noatime,nosuid,nodev,discard							wait,check,formattable,nofail
 
-# Persist
-/dev/block/by-name/persist	/persist	ext4	noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc			wait,check,formattable
+# Persist (backup & flash only — wipe disabled, wiping this can be dangerous/brick-prone)
+/dev/block/by-name/persist	/persist	ext4	noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc			wait,check,formattable,backup=1,flashimg=1,wipeingui=0,canbewiped=0
+
+# Extra partitions for Install-Image (flashimg) and Backup/Restore in the OrangeFox GUI
+#<mnt_point>	<fstype>	<device>				<flags>
+/lk		emmc		/dev/block/by-name/lk			flags=display="LK (Bootloader)";backup=1;flashimg=1
+/logo		emmc		/dev/block/by-name/logo		flags=display="Logo";backup=1;flashimg=1
