@@ -10,8 +10,12 @@ product				/product	auto		ro											wait,slotselect,logical,first_stage_mount
 system_ext			/system_ext	auto		ro											wait,slotselect,logical,first_stage_mount
 vendor_dlkm			/vendor_dlkm	auto		ro											wait,slotselect,logical,first_stage_mount
 odm_dlkm			/odm_dlkm	auto		ro											wait,slotselect,logical,first_stage_mount
-odm				/odm		auto		ro											wait,slotselect,logical,first_stage_mount,nofail,backup=1,flashimg=1
-system_dlkm			/system_dlkm	auto		ro											wait,slotselect,logical,first_stage_mount,nofail,backup=1,flashimg=1
+# odm and system_dlkm removed: not present in BOARD_MAIN_PARTITION_LIST (BoardConfig.mk) —
+# declaring them as logical partitions made OrangeFox hang/fail resolving them at boot.
+# If your device actually has them (check with: lpdump /dev/block/by-name/super), re-add
+# without "wait" first to confirm they resolve, e.g.:
+# odm           /odm            auto  ro  slotselect,logical,first_stage_mount,nofail,backup=1,flashimg=1
+# system_dlkm   /system_dlkm    auto  ro  slotselect,logical,first_stage_mount,nofail,backup=1,flashimg=1
 
 # Userdata & metadata
 /dev/block/by-name/metadata	/metadata	ext4		noatime,nosuid,nodev,discard							wait,check,formattable,first_stage_mount,backup=1,flashimg=1
