@@ -146,8 +146,8 @@ TARGET_SCREEN_DENSITY := 420
 # Brightness
 # NOTE: override used due to MTK-specific range (0–5119)
 TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
-TW_DEFAULT_BRIGHTNESS := 600
-TW_MAX_BRIGHTNESS     := 4095
+TW_DEFAULT_BRIGHTNESS := 300
+TW_MAX_BRIGHTNESS     := 3000
 
 # TWRP Status bar icon positions
 # TW_STATUS_ICONS_ALIGN  := center
