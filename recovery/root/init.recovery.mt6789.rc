@@ -4,7 +4,8 @@ import /init.tee.rc
 on init
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     setprop crypto.ready 1
-
+    
+    # Fastbootd
     setprop sys.usb.configfs 1
     setprop sys.usb.ffs.aio_compat 1
     setprop sys.usb.ffs.ready 1
@@ -33,7 +34,8 @@ on post-fs
     start boot-hal-1-2
 
     # Support A/B feature for UFS boot region
-    wait /dev/block/mmcblk0boot0 2
+    # (removed "wait" on mmcblk0boot0: node does not exist until the symlink below
+    #  creates it, so it only stalled post-fs for 2s on every boot)
     symlink /dev/block/sda /dev/block/mmcblk0boot0
     symlink /dev/block/sdb /dev/block/mmcblk0boot1
     symlink /dev/block/mmcblk0boot0 /dev/block/by-name/preloader_a
@@ -51,10 +53,8 @@ on post-fs
 on boot
     setprop sys.usb.config adb
 
-    # FIX: Setup USB idVendor/idProduct via ConfigFS
-    # KM6 kernel does not have /sys/class/android_usb — uses ConfigFS gadget
-    write /config/usb_gadget/g1/idVendor 0x0E8D
-    write /config/usb_gadget/g1/idProduct 0xD001
+    # USB ConfigFS gadget (idVendor/idProduct/strings) is fully set up in
+    # init.recovery.usb.rc; duplicate writes removed (g1 may not exist yet here).
 
     start mtk.plpath.utils.link
 
@@ -159,3 +159,23 @@ on property:crypto.ready=0
 
 on property:servicemanager.ready=true
     setprop sys.boot_completed 1
+
+# ─────────────────────────────────────────
+# Backlight + RTC
+# leds-mtk-disp.ko and rtc-mt6397.ko are loaded late (vendor_boot modules), so
+#  - /sys/class/leds/lcd-backlight does not exist when the GUI starts and the
+#    panel stays at the bootloader level (very bright)
+#  - kernel hctosys never runs for the late RTC, so system time stays at 1970
+# Apply both once the modules are in. Commands are idempotent, so both triggers are safe.
+# ─────────────────────────────────────────
+on property:twrp.modules.loaded=true
+    wait /sys/class/leds/lcd-backlight/brightness 5
+    write /sys/class/leds/lcd-backlight/brightness 80
+    wait /dev/rtc0 5
+    exec u:r:recovery:s0 -- /system/bin/toybox hwclock -s -u -f /dev/rtc0
+
+on property:sys.boot_completed=1
+    wait /sys/class/leds/lcd-backlight/brightness 5
+    write /sys/class/leds/lcd-backlight/brightness 80
+    wait /dev/rtc0 5
+    exec u:r:recovery:s0 -- /system/bin/toybox hwclock -s -u -f /dev/rtc0
