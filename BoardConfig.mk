@@ -58,8 +58,10 @@ BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 # ─────────────────────────────────────────
 # Partitions
 # ─────────────────────────────────────────
-BOARD_FLASH_BLOCK_SIZE              := 262144 # (BOARD_PAGE_SIZE * 64)
-BOARD_SUPER_PARTITION_SIZE          := 12884901888 # 12 GiB
+# 262144 = BOARD_PAGE_SIZE * 64
+BOARD_FLASH_BLOCK_SIZE              := 262144
+# 12 GiB
+BOARD_SUPER_PARTITION_SIZE          := 12884901888
 BOARD_MAIN_SIZE                     := $(shell echo $$(($(BOARD_SUPER_PARTITION_SIZE) - 4194304)))
 BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
 
@@ -144,10 +146,12 @@ TW_FRAMERATE := 60
 TARGET_SCREEN_DENSITY := 420
 
 # Brightness
-# NOTE: override used due to MTK-specific range (0–5119)
-TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
-TW_DEFAULT_BRIGHTNESS := 300
-TW_MAX_BRIGHTNESS     := 3000
+# sysfs lcd-backlight range comes from DT: max-brightness = 255 (max-hw-brightness = 2047
+# is the internal panel scale, NOT what /sys/.../brightness accepts).
+# Old values (default 300 / max 3000) were above 255 -> clamped to full brightness.
+TW_BRIGHTNESS_PATH    := /sys/class/leds/lcd-backlight/brightness
+TW_MAX_BRIGHTNESS     := 255
+TW_DEFAULT_BRIGHTNESS := 80
 
 # TWRP Status bar icon positions
 # TW_STATUS_ICONS_ALIGN  := center
