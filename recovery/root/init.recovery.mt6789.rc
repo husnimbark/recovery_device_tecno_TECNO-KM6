@@ -2,11 +2,14 @@ import /init.tee.rc
 # import /init.device.rc  # removed: file does not exist
 
 on init
-    setprop sys.usb.configfs 1
-    setprop sys.usb.controller "musb-hdrc"
-    setprop sys.usb.ffs.aio_compat 0
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     setprop crypto.ready 1
+
+    setprop sys.usb.configfs 1
+    setprop sys.usb.ffs.aio_compat 1
+    setprop sys.usb.ffs.ready 1
+    setprop sys.usb.controller "musb-hdrc"
+    setprop vendor.usb.controller "musb-hdrc"
 
     # FIX: Create /tmp/prop.info to suppress mv warning from PBRP scripts
     write /tmp/prop.info ""
